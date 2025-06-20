@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\USER\\Desktop\\PRUEBA_TRABAJO\\NUEVO_PROYECTO\\Sln_PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F89FAB64-FD55-4D63-9EC0-C02AC0C62A4B}|PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio.csproj|c:\\users\\user\\desktop\\prueba_trabajo\\nuevo_proyecto\\sln_pruebadesarrollosoftware_ojedagutierrezmauricio\\pruebadesarrollosoftware_ojedagutierrezmauricio\\views\\trabajadores\\listar_trabajadores.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F89FAB64-FD55-4D63-9EC0-C02AC0C62A4B}|PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio.csproj|solutionrelative:pruebadesarrollosoftware_ojedagutierrezmauricio\\views\\trabajadores\\listar_trabajadores.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F89FAB64-FD55-4D63-9EC0-C02AC0C62A4B}|PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio.csproj|c:\\users\\user\\desktop\\prueba_trabajo\\nuevo_proyecto\\sln_pruebadesarrollosoftware_ojedagutierrezmauricio\\pruebadesarrollosoftware_ojedagutierrezmauricio\\controllers\\trabajadorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F89FAB64-FD55-4D63-9EC0-C02AC0C62A4B}|PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio.csproj|solutionrelative:pruebadesarrollosoftware_ojedagutierrezmauricio\\controllers\\trabajadorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F89FAB64-FD55-4D63-9EC0-C02AC0C62A4B}|PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio.csproj|c:\\users\\user\\desktop\\prueba_trabajo\\nuevo_proyecto\\sln_pruebadesarrollosoftware_ojedagutierrezmauricio\\pruebadesarrollosoftware_ojedagutierrezmauricio\\models\\trabajadores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F89FAB64-FD55-4D63-9EC0-C02AC0C62A4B}|PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio.csproj|solutionrelative:pruebadesarrollosoftware_ojedagutierrezmauricio\\models\\trabajadores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F89FAB64-FD55-4D63-9EC0-C02AC0C62A4B}|PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio.csproj|c:\\users\\user\\desktop\\prueba_trabajo\\nuevo_proyecto\\sln_pruebadesarrollosoftware_ojedagutierrezmauricio\\pruebadesarrollosoftware_ojedagutierrezmauricio\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{F89FAB64-FD55-4D63-9EC0-C02AC0C62A4B}|PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio.csproj|solutionrelative:pruebadesarrollosoftware_ojedagutierrezmauricio\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 271,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TrabajadoresController.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\PRUEBA_TRABAJO\\NUEVO_PROYECTO\\Sln_PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Controllers\\TrabajadoresController.cs",
+              "RelativeDocumentMoniker": "PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Controllers\\TrabajadoresController.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\PRUEBA_TRABAJO\\NUEVO_PROYECTO\\Sln_PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Controllers\\TrabajadoresController.cs",
+              "RelativeToolTip": "PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Controllers\\TrabajadoresController.cs",
+              "ViewState": "AgIAANEAAAAAAAAAAAAswNoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T07:09:46.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Listar_Trabajadores.cshtml",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\PRUEBA_TRABAJO\\NUEVO_PROYECTO\\Sln_PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Views\\Trabajadores\\Listar_Trabajadores.cshtml",
+              "RelativeDocumentMoniker": "PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Views\\Trabajadores\\Listar_Trabajadores.cshtml",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\PRUEBA_TRABAJO\\NUEVO_PROYECTO\\Sln_PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Views\\Trabajadores\\Listar_Trabajadores.cshtml",
+              "RelativeToolTip": "PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Views\\Trabajadores\\Listar_Trabajadores.cshtml",
+              "ViewState": "AgIAACoBAAAAAAAAAAAjwDIBAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-20T07:07:52.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Trabajadores.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\PRUEBA_TRABAJO\\NUEVO_PROYECTO\\Sln_PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Models\\Trabajadores.cs",
+              "RelativeDocumentMoniker": "PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Models\\Trabajadores.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\PRUEBA_TRABAJO\\NUEVO_PROYECTO\\Sln_PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Models\\Trabajadores.cs",
+              "RelativeToolTip": "PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Models\\Trabajadores.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAiwAQAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-20T06:49:36.485Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\PRUEBA_TRABAJO\\NUEVO_PROYECTO\\Sln_PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\PRUEBA_TRABAJO\\NUEVO_PROYECTO\\Sln_PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "PruebaDesarrolloSoftware_OjedaGutierrezMauricio\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAABnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-20T06:37:03.752Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

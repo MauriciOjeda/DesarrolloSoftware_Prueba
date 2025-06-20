@@ -1,0 +1,384 @@
+﻿@model IEnumerable<PruebaDesarrolloSoftware_OjedaGutierrezMauricio.Models.Trabajadores>
+
+@{
+    ViewData["Title"] = "Listar_Trabajadores";
+}
+
+<h1>Listado de Trabajadores</h1>
+
+<p>
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#registrarTrabajadorModal" style="background-color: #0a5772; color: white;">
+        Nuevo Registro
+    </button>
+</p>
+
+
+<table id="tablaTrabajadores" class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Tipo Documento
+            </th>
+            <th>
+                Nro Documento
+            </th>
+            <th>
+                Nombres
+            </th>
+            <th>
+                Sexo
+            </th>
+            <th>
+                Departamento
+            </th>
+            <th>
+                Provincia
+            </th>
+            <th>
+                Distrito
+            </th>
+            <th>
+                Acción
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoDocumento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroDocumento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombres)
+                </td>
+                <td>
+                    @if (item.Sexo == "M")
+                    {
+                        <i class="badge" style="background-color: #2582d5;" data-bs-toggle="tooltip">M</i>
+                    }
+                    else if (item.Sexo == "F")
+                    {
+                        <i class="badge" style="background-color: #d56f25;" data-bs-toggle="tooltip">F</i>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Departamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Provincia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Distrito)
+                </td>
+                <td>
+                    
+                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#registrarTrabajadorModal" style="background-color: #cbc50b; color: white;">
+                        Editar
+                    </button>
+                    <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarEliminarModal" data-id="@item.Id" data-nombre="@item.Nombres">
+                        <i class="fas fa-trash-alt"></i> Eliminar
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="registrarTrabajadorModal" tabindex="-1" aria-labelledby="registrarTrabajadorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-gradient-primary text-white">
+                <h5 class="modal-title fs-4 fw-bold" id="registrarTrabajadorModalLabel">
+                    <i class="fas fa-user-plus me-2"></i>Registrar Nuevo Trabajador
+                </h5>
+                <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form id="registrarTrabajadorForm">
+                <div class="modal-body p-4">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <h5 class="section-title bg-light p-2 rounded">
+                                <i class="fas fa-id-card me-2 text-primary"></i>Datos Personales
+                            </h5>
+
+                            <div class="mb-3">
+                                <label for="tipoDocumento" class="form-label fw-semibold">Tipo Documento <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm" id="tipoDocumento" name="tipoDocumento" required>
+                                    <option value="">Seleccione tipo...</option>
+                                    <option value="DNI">DNI</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="numeroDocumento" class="form-label fw-semibold">Número Documento <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm" id="numeroDocumento" name="numeroDocumento" required maxlength="12">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="nombres" class="form-label fw-semibold">Nombres <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control form-control-sm" id="nombres" name="nombres" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Sexo <span class="text-danger">*</span></label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sexo" id="sexoM" value="M" required>
+                                        <label class="form-check-label" for="sexoM">Masculino</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sexo" id="sexoF" value="F" required>
+                                        <label class="form-check-label" for="sexoF">Femenino</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h5 class="section-title bg-light p-2 rounded">
+                                <i class="fas fa-map-marker-alt me-2 text-primary"></i>Ubicación
+                            </h5>
+
+                            <div class="mb-3">
+                                <label for="idDepartamento" class="form-label fw-semibold">Departamento <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm" id="idDepartamento" name="idDepartamento" required>
+                                    <option value="">Seleccione...</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="idProvincia" class="form-label fw-semibold">Provincia <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm" id="idProvincia" name="idProvincia" required>
+                                    <option value="">Seleccione...</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="idDistrito" class="form-label fw-semibold">Distrito <span class="text-danger">*</span></label>
+                                <select class="form-select form-select-sm" id="idDistrito" name="idDistrito" required>
+                                    <option value="">Seleccione...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i> Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <span id="registrarSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                        <i class="fas fa-save me-1"></i> Registrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="confirmarEliminarModal" tabindex="-1" aria-labelledby="confirmarEliminarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="confirmarEliminarLabel">
+                    <i class="fas fa-exclamation-triangle me-2"></i> Confirmar Eliminación
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro de eliminar el registro de <strong id="nombreTrabajador"></strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="btnConfirmarEliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            cargarDepartamentos();
+            const table = $('#tablaTrabajadores').DataTable({
+                responsive: true,
+                scrollCollapse: true,
+                fixedColumns: {
+                    left: 1,
+                    right: 1
+                },
+
+                paging: false,
+                searching: false,
+
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+                },
+                columnDefs: [
+                { responsivePriority: 1, targets: 0 }, 
+                { responsivePriority: 2, targets: 1 }, 
+                { responsivePriority: 3, targets: 2, width: "150px" }, 
+                { responsivePriority: 4, targets: 7, width: "200px"},
+                { targets: 6, width: "100px" } 
+            ]
+        });
+
+            $('#registrarTrabajadorModal').on('show.bs.modal', function () {
+                cargarDepartamentos();
+                $('#idProvincia').empty().append('<option value="">Seleccione...</option>');
+                $('#idDistrito').empty().append('<option value="">Seleccione...</option>');
+            });
+
+            $('#registrarTrabajadorModal').on('hidden.bs.modal', function () {
+                $('#registrarTrabajadorForm')[0].reset();
+                $('#idDepartamento').empty().append('<option value="">Seleccione...</option>');
+                $('#idProvincia').empty().append('<option value="">Seleccione...</option>');
+                $('#idDistrito').empty().append('<option value="">Seleccione...</option>');
+            });
+
+            $('#idDepartamento').change(function () {
+                const idDepartamento = $(this).val();
+                if (idDepartamento) {
+                    cargarProvincias(idDepartamento);
+                } else {
+                    $('#idProvincia').empty().append('<option value="">Seleccione...</option>');
+                    $('#idDistrito').empty().append('<option value="">Seleccione...</option>');
+                }
+            });
+
+            $('#idProvincia').change(function () {
+                const idProvincia = $(this).val();
+                if (idProvincia) {
+                    cargarDistritos(idProvincia);
+                } else {
+                    $('#idDistrito').empty().append('<option value="">Seleccione...</option>');
+                }
+            });
+
+            $('#registrarTrabajadorForm').submit(function(e) {
+                e.preventDefault();
+
+                const $btn = $(this).find('button[type="submit"]');
+                const $spinner = $('#registrarSpinner');
+
+                $btn.prop('disabled', true);
+                $spinner.removeClass('d-none');
+
+                $.ajax({
+                    url: '/Trabajadores/RegistrarTrabajador',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        if (response.success) {
+                            $('#registrarTrabajadorModal').modal('hide');
+                            location.reload();
+                        } else {
+                            alert('Error: ' + response.message);
+                        }
+                    },
+                    error: function(xhr) {
+                        alert('Error en la solicitud: ' + xhr.responseText);
+                    },
+                    complete: function() {
+                        $btn.prop('disabled', false);
+                        $spinner.addClass('d-none');
+                    }
+                });
+            });
+
+            $('#confirmarEliminarModal').on('show.bs.modal', function (event) {
+                const button = $(event.relatedTarget);
+                trabajadorIdAEliminar = button.data('id');
+                const nombre = button.data('nombre');
+                $('#nombreTrabajador').text(nombre);
+            });
+
+            $('#btnConfirmarEliminar').click(function() {
+            if (trabajadorIdAEliminar) {
+                $.ajax({
+                    url: '/Trabajadores/EliminarTrabajador',
+                    type: 'POST',
+                    data: { id: trabajadorIdAEliminar },
+                    success: function(response) {
+                        $('#confirmarEliminarModal').modal('hide'); // Cierra el modal
+                        location.reload(); // Recarga la página inmediatamente
+                    },
+
+                });
+            }
+        });
+
+
+            $(window).resize(function () {
+                table.columns.adjust();
+            });
+        });
+
+        function cargarDepartamentos() {
+            $.get('/Trabajadores/ObtenerDepartamentos')
+                .done(function (data) {
+                    const $dep = $('#idDepartamento');
+                    $dep.empty().append('<option value="">Seleccione...</option>');
+                    $.each(data, function (i, item) {
+                        $dep.append(`<option value="${item.id}">${item.nombreDepartamento}</option>`);
+                    });
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error("Error al cargar departamentos:", textStatus, errorThrown);
+                    alert('Error al cargar departamentos.');
+                });
+        }
+
+        function cargarProvincias(idDepartamento) {
+            $.get('/Trabajadores/ObtenerProvincias', { idDepartamento: idDepartamento })
+                .done(function (data) {
+                    const $prov = $('#idProvincia');
+                    $prov.empty().append('<option value="">Seleccione...</option>');
+                    $('#idDistrito').empty().append('<option value="">Seleccione...</option>');
+
+                    if (data.length === 0) {
+                        $prov.append('<option value="">No hay provincias disponibles</option>');
+                    } else {
+                        $.each(data, function (i, item) {
+                            $prov.append(`<option value="${item.id}">${item.nombreProvincia}</option>`);
+                        });
+                    }
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error("Error al cargar provincias:", textStatus, errorThrown);
+                    alert('Error al cargar provincias.');
+                });
+        }
+
+        function cargarDistritos(idProvincia) {
+            $.get('/Trabajadores/ObtenerDistritos', { idProvincia: idProvincia })
+                .done(function (data) {
+                    const $dist = $('#idDistrito');
+                    $dist.empty().append('<option value="">Seleccione...</option>');
+
+                    if (data.length === 0) {
+                        $dist.append('<option value="">No hay distritos disponibles</option>');
+                    } else {
+                        $.each(data, function (i, item) {
+                            $dist.append(`<option value="${item.id}">${item.nombreDistrito}</option>`);
+                        });
+                    }
+                })
+                .fail(function (jqXHR, textStatus, errorThrown) {
+                    console.error("Error al cargar distritos:", textStatus, errorThrown);
+                    alert('Error al cargar distritos.');
+                });
+        }
+    </script>
+}
