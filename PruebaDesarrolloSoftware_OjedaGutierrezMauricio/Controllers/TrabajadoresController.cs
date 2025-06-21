@@ -117,7 +117,7 @@ namespace PruebaDesarrolloSoftware_OjedaGutierrezMauricio.Controllers
         #endregion
 
         #region PROCESOS PARA TRABAJADORES
-        public List<Trabajadores> ListarTrabajadores()
+        public List<Trabajadores> ListarTrabajadores(string sexo)
         {
             var lista = new List<Trabajadores>();
 
@@ -130,6 +130,7 @@ namespace PruebaDesarrolloSoftware_OjedaGutierrezMauricio.Controllers
                 using (SqlCommand cmd = new SqlCommand("listar_trabajadores", cnx))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Sexo", string.IsNullOrEmpty(sexo) ? (object)DBNull.Value : sexo);
 
                     using (SqlDataReader dr = cmd.ExecuteReader())
                     {
@@ -142,9 +143,21 @@ namespace PruebaDesarrolloSoftware_OjedaGutierrezMauricio.Controllers
                                 NumeroDocumento = dr.IsDBNull(2) ? string.Empty : dr.GetString(2),
                                 Nombres = dr.IsDBNull(3) ? string.Empty : dr.GetString(3),
                                 Sexo = dr.IsDBNull(4) ? string.Empty : dr.GetString(4),
-                                Departamento = dr.IsDBNull(5) ? string.Empty : dr.GetString(5),
-                                Provincia = dr.IsDBNull(6) ? string.Empty : dr.GetString(6),
-                                Distrito = dr.IsDBNull(7) ? string.Empty : dr.GetString(7),
+                                IdDepartamento = new Departamento
+                                {
+                                    Id = dr.GetInt32(5),
+                                    NombreDepartamento = dr.GetString(6)
+                                },
+                                IdProvincia = new Provincia
+                                {
+                                    Id = dr.GetInt32(7),
+                                    NombreProvincia = dr.GetString(8)
+                                },
+                                IdDistrito = new Distrito
+                                {
+                                    Id = dr.GetInt32(9),
+                                    NombreDistrito = dr.GetString(10)
+                                }
                             };
 
                             lista.Add(obj);
@@ -209,6 +222,60 @@ namespace PruebaDesarrolloSoftware_OjedaGutierrezMauricio.Controllers
 
 
         [HttpPost]
+        public async Task<IActionResult> ActualizarTrabajador(
+            [FromForm] int idTrabajador,
+            [FromForm] string tipoDocumento,
+            [FromForm] string numeroDocumento,
+            [FromForm] string nombres,
+            [FromForm] string sexo,
+            [FromForm] int idDepartamento,
+            [FromForm] int idProvincia,
+            [FromForm] int idDistrito)
+                {
+                    try
+                    {
+                        if (idTrabajador <= 0 || string.IsNullOrEmpty(tipoDocumento) || string.IsNullOrEmpty(numeroDocumento) ||
+                            string.IsNullOrEmpty(nombres) || string.IsNullOrEmpty(sexo))
+                        {
+                            return Json(new { success = false, message = "Complete todos los campos obligatorios." });
+                        }
+
+                        using (SqlConnection cnx = new SqlConnection(cad_cn))
+                        {
+                            await cnx.OpenAsync();
+
+                            using (SqlCommand cmd = new SqlCommand("actualizar_trabajador", cnx))
+                            {
+                                cmd.CommandType = CommandType.StoredProcedure;
+
+                                cmd.Parameters.AddWithValue("@IdTrabajador", idTrabajador);
+                                cmd.Parameters.AddWithValue("@TipoDocumento", tipoDocumento);
+                                cmd.Parameters.AddWithValue("@NumeroDocumento", numeroDocumento);
+                                cmd.Parameters.AddWithValue("@Nombres", nombres);
+                                cmd.Parameters.AddWithValue("@Sexo", sexo);
+                                cmd.Parameters.AddWithValue("@IdDepartamento", idDepartamento);
+                                cmd.Parameters.AddWithValue("@IdProvincia", idProvincia);
+                                cmd.Parameters.AddWithValue("@IdDistrito", idDistrito);
+
+                                int filasAfectadas = await cmd.ExecuteNonQueryAsync();
+
+                                bool success = filasAfectadas > 0;
+                                string mensaje = success ? "Trabajador actualizado correctamente." : "No se encontró el trabajador o no se realizaron cambios.";
+
+                                return Json(new { success = success, message = mensaje });
+                            }
+                        }
+                    }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Error al actualizar: " + ex.Message });
+            }
+        }
+
+
+
+
+        [HttpPost]
         public async Task<IActionResult> EliminarTrabajador([FromForm] int id)
         {
             try
@@ -238,9 +305,9 @@ namespace PruebaDesarrolloSoftware_OjedaGutierrezMauricio.Controllers
 
         #endregion
 
-        public ActionResult Listar_Trabajadores()
+        public ActionResult Listar_Trabajadores(string sexo=null!)
         {
-            var listado = ListarTrabajadores();
+            var listado = ListarTrabajadores(sexo);
 
             return View(listado);
         }

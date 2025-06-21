@@ -13,6 +13,15 @@
 </p>
 
 
+
+<div class="mb-3 d-flex justify-content-end">
+    <select id="filtroSexo" class="form-select form-select-sm" style="max-width: 200px;">
+        <option value="">Todos</option>
+        <option value="M">Masculino</option>
+        <option value="F">Femenino</option>
+    </select>
+</div>
+
 <table id="tablaTrabajadores" class="table table-striped">
     <thead>
         <tr>
@@ -52,7 +61,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.NumeroDocumento)
                 </td>
-                <td>
+                <td class="text-uppercase">
                     @Html.DisplayFor(modelItem => item.Nombres)
                 </td>
                 <td>
@@ -66,17 +75,25 @@
                     }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Departamento)
+                    @Html.DisplayFor(modelItem => item.IdDepartamento.NombreDepartamento)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Provincia)
+                    @Html.DisplayFor(modelItem => item.IdProvincia.NombreProvincia)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Distrito)
+                    @Html.DisplayFor(modelItem => item.IdDistrito.NombreDistrito)
                 </td>
                 <td>
-                    
-                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#registrarTrabajadorModal" style="background-color: #cbc50b; color: white;">
+
+                    <button type="button" class="btn btn-warning btn-sm btn-editar"
+                            data-id="@item.Id"
+                            data-tipo="@item.TipoDocumento"
+                            data-numero="@item.NumeroDocumento"
+                            data-nombres="@item.Nombres"
+                            data-sexo="@item.Sexo"
+                            data-dep="@item.IdDepartamento.Id"
+                            data-prov="@item.IdProvincia.Id"
+                            data-dist="@item.IdDistrito.Id">
                         Editar
                     </button>
                     <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmarEliminarModal" data-id="@item.Id" data-nombre="@item.Nombres">
@@ -89,28 +106,24 @@
 </table>
 
 
+
 <div class="modal fade" id="registrarTrabajadorModal" tabindex="-1" aria-labelledby="registrarTrabajadorModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg">
-            <div class="modal-header bg-gradient-primary text-white">
+            <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title fs-4 fw-bold" id="registrarTrabajadorModalLabel">
                     <i class="fas fa-user-plus me-2"></i>Registrar Nuevo Trabajador
                 </h5>
-                <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <form id="registrarTrabajadorForm">
                 <div class="modal-body p-4">
                     <div class="row g-4">
                         <div class="col-md-6">
-                            <h5 class="section-title bg-light p-2 rounded">
-                                <i class="fas fa-id-card me-2 text-primary"></i>Datos Personales
-                            </h5>
-
                             <div class="mb-3">
                                 <label for="tipoDocumento" class="form-label fw-semibold">Tipo Documento <span class="text-danger">*</span></label>
                                 <select class="form-select form-select-sm" id="tipoDocumento" name="tipoDocumento" required>
-                                    <option value="">Seleccione tipo...</option>
                                     <option value="DNI">DNI</option>
                                 </select>
                             </div>
@@ -141,9 +154,6 @@
                         </div>
 
                         <div class="col-md-6">
-                            <h5 class="section-title bg-light p-2 rounded">
-                                <i class="fas fa-map-marker-alt me-2 text-primary"></i>Ubicación
-                            </h5>
 
                             <div class="mb-3">
                                 <label for="idDepartamento" class="form-label fw-semibold">Departamento <span class="text-danger">*</span></label>
@@ -170,7 +180,7 @@
                 </div>
 
                 <div class="modal-footer bg-light">
-                    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
                         <i class="fas fa-times me-1"></i> Cancelar
                     </button>
                     <button type="submit" class="btn btn-primary btn-sm">
@@ -183,6 +193,83 @@
     </div>
 </div>
 
+<div class="modal fade" id="editarTrabajadorModal" tabindex="-1" aria-labelledby="editarTrabajadorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-warning text-white">
+                <h5 class="modal-title fs-4 fw-bold" id="editarTrabajadorModalLabel">
+                    <i class="fas fa-user-edit me-2"></i>Editar Trabajador
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+
+            <form id="editarTrabajadorForm">
+                <input type="hidden" id="idTrabajadorEditar" name="idTrabajador" />
+                <div class="modal-body p-4">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="tipoDocumentoEditar" class="form-label fw-semibold">Tipo Documento</label>
+                                <select class="form-select form-select-sm" id="tipoDocumentoEditar" name="tipoDocumento" required>
+                                    <option value="">Seleccione tipo...</option>
+                                    <option value="DNI">DNI</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="numeroDocumentoEditar" class="form-label fw-semibold">Número Documento</label>
+                                <input type="text" class="form-control form-control-sm" id="numeroDocumentoEditar" name="numeroDocumento" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="nombresEditar" class="form-label fw-semibold">Nombres</label>
+                                <input type="text" class="form-control form-control-sm" id="nombresEditar" name="nombres" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Sexo</label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sexo" id="sexoMEditar" value="M">
+                                        <label class="form-check-label" for="sexoMEditar">Masculino</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sexo" id="sexoFEditar" value="F">
+                                        <label class="form-check-label" for="sexoFEditar">Femenino</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="idDepartamentoEditar" class="form-label fw-semibold">Departamento</label>
+                                <select class="form-select form-select-sm" id="idDepartamentoEditar" name="idDepartamento" required></select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="idProvinciaEditar" class="form-label fw-semibold">Provincia</label>
+                                <select class="form-select form-select-sm" id="idProvinciaEditar" name="idProvincia" required></select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="idDistritoEditar" class="form-label fw-semibold">Distrito</label>
+                                <select class="form-select form-select-sm" id="idDistritoEditar" name="idDistrito" required></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-warning btn-sm">
+                        <i class="fas fa-save me-1"></i> Actualizar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="confirmarEliminarModal" tabindex="-1" aria-labelledby="confirmarEliminarLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -207,10 +294,11 @@
 
 
 
+
 @section Scripts {
     <script>
         $(document).ready(function () {
-            cargarDepartamentos();
+            
             const table = $('#tablaTrabajadores').DataTable({
                 responsive: true,
                 scrollCollapse: true,
@@ -232,7 +320,26 @@
                 { responsivePriority: 4, targets: 7, width: "200px"},
                 { targets: 6, width: "100px" } 
             ]
+            
         });
+
+        cargarDepartamentos();
+            const urlParams = new URLSearchParams(window.location.search);
+            const sexo = urlParams.get('sexo');
+
+            if (sexo) {
+                $('#filtroSexo').val(sexo);
+            } else {
+                $('#filtroSexo').val('');
+            }
+
+        $('#filtroSexo').change(function() {
+            const sexo = $(this).val();
+            const url = sexo ? `/Trabajadores/Listar_Trabajadores?sexo=${sexo}` : '/Trabajadores/Listar_Trabajadores';
+            window.location.href = url;
+        });
+
+
 
             $('#registrarTrabajadorModal').on('show.bs.modal', function () {
                 cargarDepartamentos();
@@ -282,7 +389,7 @@
                     success: function(response) {
                         if (response.success) {
                             $('#registrarTrabajadorModal').modal('hide');
-                            location.reload();
+                             window.location.href = '/Trabajadores/Listar_Trabajadores';
                         } else {
                             alert('Error: ' + response.message);
                         }
@@ -296,6 +403,68 @@
                     }
                 });
             });
+
+            $(document).on('click', '.btn-editar', function () {
+            const btn = $(this);
+            $('#idTrabajadorEditar').val(btn.data('id'));
+            $('#tipoDocumentoEditar').val(btn.data('tipo'));
+            $('#numeroDocumentoEditar').val(btn.data('numero'));
+            $('#nombresEditar').val(btn.data('nombres'));
+
+            $('#idDepartamentoEditar').change(function () {
+            const idDepartamento = $(this).val();
+                if (idDepartamento) {
+                    cargarProvinciasEditar(idDepartamento, null, null);
+                } else {
+                    $('#idProvinciaEditar').empty().append('<option value="">Seleccione...</option>');
+                    $('#idDistritoEditar').empty().append('<option value="">Seleccione...</option>');
+                }  
+            });
+
+            $('#idProvinciaEditar').change(function () {
+            const idProvincia = $(this).val();
+                if (idProvincia) {
+                    cargarDistritosEditar(idProvincia, null);
+                } else {
+                    $('#idDistritoEditar').empty().append('<option value="">Seleccione...</option>');
+                }
+            });
+
+
+            if (btn.data('sexo') === 'M') {
+                $('#sexoMEditar').prop('checked', true);
+            } else {
+                $('#sexoFEditar').prop('checked', true);
+            }
+
+            cargarDepartamentosEditar(btn.data('dep'), btn.data('prov'), btn.data('dist'));
+
+            $('#editarTrabajadorModal').modal('show');
+        });
+
+            
+
+            $('#editarTrabajadorForm').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/Trabajadores/ActualizarTrabajador',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function (res) {
+                    if (res.success) {
+                        $('#editarTrabajadorModal').modal('hide');
+                        location.reload();
+                    } else {
+                        alert('Error: ' + res.message);
+                    }
+                },
+                error: function (xhr) {
+                    alert('Error al actualizar: ' + xhr.responseText);
+                }
+            });
+        });
+
+
 
             $('#confirmarEliminarModal').on('show.bs.modal', function (event) {
                 const button = $(event.relatedTarget);
@@ -311,8 +480,8 @@
                     type: 'POST',
                     data: { id: trabajadorIdAEliminar },
                     success: function(response) {
-                        $('#confirmarEliminarModal').modal('hide'); // Cierra el modal
-                        location.reload(); // Recarga la página inmediatamente
+                        $('#confirmarEliminarModal').modal('hide');
+                        location.reload(); 
                     },
 
                 });
@@ -380,5 +549,52 @@
                     alert('Error al cargar distritos.');
                 });
         }
+
+        function cargarDepartamentosEditar(idDepSel, idProvSel, idDistSel) {
+            $.get('/Trabajadores/ObtenerDepartamentos', function (data) {
+                const $dep = $('#idDepartamentoEditar');
+                $dep.empty().append('<option value="">Seleccione...</option>');
+
+                data.forEach(item => {
+                    $dep.append(`<option value="${item.id}" ${item.id == idDepSel ? 'selected' : ''}>${item.nombreDepartamento}</option>`);
+                });
+
+                if (idDepSel) {
+                    cargarProvinciasEditar(idDepSel, idProvSel, idDistSel);
+                } else {
+                    $('#idProvinciaEditar').empty().append('<option value="">Seleccione...</option>');
+                    $('#idDistritoEditar').empty().append('<option value="">Seleccione...</option>');
+                }
+            });
+        }
+
+        function cargarProvinciasEditar(idDepartamento, idProvSel = null, idDistSel = null) {
+            $.get('/Trabajadores/ObtenerProvincias', { idDepartamento: idDepartamento }, function (data) {
+                const $prov = $('#idProvinciaEditar');
+                $prov.empty().append('<option value="">Seleccione...</option>');
+
+                data.forEach(item => {
+                    $prov.append(`<option value="${item.id}" ${item.id == idProvSel ? 'selected' : ''}>${item.nombreProvincia}</option>`);
+                });
+                if (idProvSel) {
+                    cargarDistritosEditar(idProvSel, idDistSel);
+                } else {
+                    $('#idDistritoEditar').empty().append('<option value="">Seleccione...</option>');
+                }
+            });
+        }
+
+        function cargarDistritosEditar(idProvincia, idDistSel = null) {
+            $.get('/Trabajadores/ObtenerDistritos', { idProvincia: idProvincia }, function (data) {
+                const $dist = $('#idDistritoEditar');
+                $dist.empty().append('<option value="">Seleccione...</option>');
+
+                data.forEach(item => {
+                    $dist.append(`<option value="${item.id}" ${item.id == idDistSel ? 'selected' : ''}>${item.nombreDistrito}</option>`);
+                });
+            });
+        }
+
+        
     </script>
 }
